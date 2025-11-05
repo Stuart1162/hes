@@ -1,0 +1,15 @@
+# robots.txt for https://yourelectrician-glasgow.co.uk
+# Generated on 2025-10-29
+
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*?*
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://yourelectrician-glasgow.co.uk/sitemap.xml
+
+# Crawl-delay: 10  # Uncomment if needed to prevent server overload
