@@ -98,7 +98,7 @@ const LocationPage = () => {
           </p>
           <div className="mt-6 flex gap-3">
             <a href="/get-a-quote" className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-md font-medium">Get a Free Quote</a>
-            <a href="tel:01415552233" className="bg-blue-600 hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium">Call 0141 555 2233</a>
+            <a href="tel:01416420611" className="bg-blue-600 hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium">Call 0141 642 0611</a>
           </div>
         </div>
       </section>

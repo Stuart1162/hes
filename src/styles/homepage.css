@@ -1,0 +1,586 @@
+/* ======================
+   HOMEPAGE COMPONENTS
+   ====================== */
+
+/* Hero Section */
+.home-hero {
+  color: var(--color-text);
+  min-height: 94vh;
+  padding: 0; /* use inner container padding to match site gutters */
+  position: relative;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-hero__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1rem; /* px-4 */
+}
+
+.home-hero__title {
+  font-size: 16vw;
+  padding-top: 2rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin: 0;
+  max-width: 100%;
+  color:#111;
+}
+
+/* Sticker layout around hero title */
+.home-hero__title-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.home-hero__sticker {
+  position: absolute;
+  display: block;
+  pointer-events: auto; /* enable dragging */
+  user-select: none;
+  touch-action: none; /* prevent scroll during drag */
+  cursor: grab;
+}
+
+.home-hero__sticker.is-dragging {
+  cursor: grabbing;
+}
+
+/* Approximate layout to match reference */
+.home-hero__sticker--a { /* red/yellow star */
+  width: clamp(104px, 16.2vw, 194px);
+  transform: rotate(-6deg);
+}
+
+.home-hero__sticker--b { /* sparkles */
+  width: clamp(65px, 9.72vw, 130px);
+}
+
+.home-hero__sticker--c { /* rainbow */
+  width: clamp(130px, 19.44vw, 259px);
+  transform: rotate(6deg);
+}
+
+.home-hero__sticker--d { /* eyes */
+  width: clamp(77px, 11.34vw, 146px);
+}
+
+.home-hero__sticker--e { /* thumbs-up */
+  width: clamp(104px, 14.58vw, 194px);
+}
+
+.home-hero__subtitle {
+  font-size: 1.125rem;
+  margin: 0;
+  max-width: 520px;
+  line-height: 1.3;
+  color: #333;
+  font-weight: 500;
+}
+
+.home-hero__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1rem; /* px-4 */
+}
+
+.home-hero__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Hero buttons */
+.home-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #222;
+}
+
+.home-hero__button--primary { /* Emergencies (orange) */
+  background-color: #FF3300;
+  color: #fff;
+}
+
+.home-hero__button--secondary { /* Get a Quote (amber) */
+  background-color: #ffc700;
+  color: #222;
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    min-height: 80vh;
+    padding: 0; /* inner handles gutters */
+  }
+  
+  .home-hero__title {
+    font-size: 3rem;
+    max-width: 100%;
+  }
+  
+  .home-hero__footer {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+}
+
+/* Match site gutters: sm:px-6, lg:px-8 */
+@media (min-width: 640px) {
+  .home-hero__content,
+  .home-hero__footer {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero__content,
+  .home-hero__footer {
+    padding-left: 2rem; /* lg:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+.home-feature {
+    
+}
+
+.home-features__wrap {
+}
+
+.home-feature h4 {
+    margin-bottom: 0;
+}
+
+.home-feature .icon {
+    background-color: var(--yellow-light);
+}
+
+.home-feature .icon svg {
+    fill: var(--yellow-dark);
+    color: var(--yellow-dark);
+}
+
+/* Services Section */
+.home-services {
+  padding: 4rem 1rem;
+  background-color: #f9fafb;
+}
+
+.home-services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.home-service-card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.home-service-card__image {
+  background:#F6F3EA;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius:20px;
+}
+
+.home-service-card .img-container {
+  padding:0 20px;
+  height:200px;
+  border-radius: 20px;
+}
+
+.home-service-card__content {
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.home-service-card__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0rem;
+  color: #111827;
+}
+
+.home-service-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.home-service-card__feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+}
+
+.home-service-card .icon-container {
+  border-radius: 10px;
+}
+
+.home-service-card__feature svg {
+  color: #2563eb;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.callback-banner {
+  margin-top: 4rem;
+}
+
+.about-section {
+  border-bottom:1px solid #eaeaea;
+}
+
+.about-benefits {
+  margin:3rem 0;
+}
+
+span.benefit {
+    font-weight:500;
+}
+
+/* Customer Types Section */
+.home-customer-types {
+  padding: 4rem 1rem;
+  background-color: white;
+}
+
+.home-customer-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+.icon-container {
+  border-radius:10px;
+}
+
+.home-customer-tab {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #2563eb;
+}
+
+.home-customer-tab--active {
+  background: #2563eb;
+  color: white;
+}
+
+.home-customer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.home-customer-content__image {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.home-customer-content__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-customer-content__details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.home-customer-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.home-customer-feature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  color: #4b5563;
+}
+
+.home-customer-feature svg {
+  color: #2563eb;
+  margin-right: 0.75rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* FAQ Section */
+.home-faq {
+  padding: 4rem 1rem;
+  background-color: #f9fafb;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-faq__title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+.home-faq__item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
+}
+
+.home-faq__item--active {
+  background-color: #f9fafb;
+}
+
+.home-faq__button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease-in-out;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.home-faq__button:hover {
+  background-color: #f3f4f6;
+}
+
+.home-faq__button-text {
+  font-weight: 500;
+  color: #111827;
+}
+
+.home-faq__button-icon {
+  color: #2563eb;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.home-faq__content {
+  padding: 0.5rem 1rem 1rem;
+  color: #4b5563;
+  background-color: #ffffff;
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+/* Testimonials Section */
+.home-testimonials {
+  padding: 4rem 1rem;
+  background-color: white;
+  text-align: center;
+}
+
+.home-testimonials__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+.home-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-testimonial {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: left;
+}
+
+.home-testimonial__text {
+  font-style: italic;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.home-testimonial__author {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* CTA Section */
+.home-cta {
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  color: white;
+  text-align: center;
+}
+
+.home-cta__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-cta__subtitle {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+.home-cta__button {
+  display: inline-block;
+  background: white;
+  color: #2563eb;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.home-cta__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Reviews strip (under features) */
+.home-reviews {
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
+}
+
+.home-reviews__row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.home-reviews__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+
+.home-reviews__logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.home-reviews__rating {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.home-reviews__stars {
+  color: #fbbc04; /* Google yellow */
+  font-size: 0.95rem;
+}
+
+.home-reviews__text {
+  color: #1a73e8; /* Google blue */
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.home-reviews__carousel {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.home-reviews__track {
+  display: inline-flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: reviews-marquee 40s linear infinite;
+}
+
+.home-reviews__quote {
+  color: #374151;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+@keyframes reviews-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .home-reviews__row { gap: 1rem; }
+  .home-reviews__text { font-size: 0.9rem; }
+  .home-reviews__track { gap: 2rem; }
+
+  .home-hero__title {
+    font-size:6rem;
+    padding:7rem 0 1rem;
+    position: relative;
+    z-index: 30;
+  }
+
+  .home-services {
+    padding:4rem 0;
+  }
+
+  .home-services button {
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .home-hours {
+    display: none;
+  }
+}

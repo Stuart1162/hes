@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { Shield01Icon, Clock01Icon, PoundIcon, Certificate01Icon } from 'hugeicons-react';
+import '../../styles/services.css';
+import '../../styles/customertype.css';
+import '../../styles/homepage.css';
 
 const serviceData = {
   'fuseboards': {
@@ -423,192 +427,224 @@ const ServiceTemplate = ({ serviceId: propServiceId }) => {
     cta: 'Return to Services'
   };
 
+  const [openFaq, setOpenFaq] = useState(null);
+
   return (
-    <div className="bg-white">
-      {/* Hero Section */}
-      <div className="relative bg-gray-900">
-        <div className="absolute inset-0">
-          {service.image && (
-            <img
-              className="w-full h-full object-cover opacity-30"
-              src={service.image}
-              alt={service.title}
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 mix-blend-multiply" aria-hidden="true" />
+    <div className="services-page">
+      {/* Hero Section (Domestic-style with stickers) */}
+      <section className="ct-hero service-single-hero service-hero relative py-20 lg:py-28">
+        <div className="ct-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="home-hero__title-wrap">
+              <h1 className="ct-hero-title mb-4">{service.title}</h1>
+            
+            </div>
+            <p className="text-xl md:text-2xl mt-2 text-gray-600 service-hero__desc">
+              {service.description}
+            </p>
+          </div>
         </div>
-        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            {service.title}
-          </h1>
-          <p className="mt-6 text-xl text-blue-100 max-w-3xl">
-            {service.description}
-          </p>
-        </div>
-      </div>
+      </section>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+      <div className="service-main max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="services-layout service-layout">
           {/* Main Content */}
-          <div className="lg:col-span-2">
-            <div className="prose prose-blue text-gray-600 max-w-none">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">About Our {service.title} Service</h2>
+          <div className="service-content service-hero service-about">
+            <div className="prose prose-blue services-copy service-copy max-w-none">
+              <h2 className="section-title service-about__title">About Our {service.title} Service</h2>
               <p className="text-lg">
                 Our certified electricians provide professional {service.title.toLowerCase()} services for both residential and commercial properties. 
                 We pride ourselves on quality workmanship, attention to detail, and excellent customer service.
               </p>
 
               {service.detailedDescription && (
-                <div className="mt-8 bg-blue-50 p-6 rounded-lg">
+                <div className="mt-8 bg-blue-50 p-6 rounded-lg service-details">
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Service Details</h3>
-                  <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  <div className="text-gray-700 leading-relaxed">
                     {service.detailedDescription}
                   </div>
                 </div>
               )}
               
-              <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">What's Included</h3>
-              <ul className="space-y-3">
-                {service.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {service.process && service.process.length > 0 && (
-                <>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">How We Work</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {service.process.map((step, index) => (
-                      <div key={index} className="flex items-start p-4 bg-gray-50 rounded-lg">
-                        <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold text-sm mr-3">
-                          {index + 1}
-                        </div>
-                        <span className="text-gray-700">{step}</span>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {service.benefits && service.benefits.length > 0 && (
-                <div className="mt-10 bg-blue-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Benefits of Our Service</h3>
-                  <ul className="space-y-3">
-                    {service.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start">
-                        <svg className="h-5 w-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {service.pricing && (
-                <div className="mt-10 bg-green-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Pricing Information</h3>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-2xl font-bold text-green-600">From {service.pricing.startingFrom}</p>
-                      <p className="text-sm text-gray-600 mt-1">{service.pricing.includes}</p>
-                    </div>
-                    <div className="mt-4 sm:mt-0">
-                      <a href="/get-a-quote" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-                        Get Exact Quote
-                      </a>
-                    </div>
-                  </div>
-                  {service.pricing.note && (
-                    <p className="text-xs text-gray-500 mt-3 italic">{service.pricing.note}</p>
-                  )}
-                </div>
-              )}
-
-              {service.faqs && service.faqs.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h3>
-                  <div className="space-y-4">
-                    {service.faqs.map((faq, index) => (
-                      <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                        <h4 className="font-medium text-gray-900 mb-2">{faq}</h4>
-                        <p className="text-gray-600 text-sm">Contact us for detailed answers to this question.</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
-
           {/* Sidebar */}
-          <div className="mt-12 lg:mt-0">
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg font-medium text-gray-900">Get a Free Quote</h3>
-                <p className="mt-2 text-sm text-gray-500">
-                  Contact us today to discuss your {service.title.toLowerCase()} requirements.
-                </p>
-                <div className="mt-6">
-                  <a
-                    href="tel:01234567890"
-                    className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
-                  >
-                    <FaPhoneAlt className="mr-2" />
-                    Call Now
-                  </a>
-                  <a
-                    href="mailto:info@hendersonelectrical.co.uk"
-                    className="mt-3 w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50"
-                  >
-                    <FaEnvelope className="mr-2" />
-                    Email Us
-                  </a>
-                </div>
-                <div className="mt-6">
-                  <div className="flex items-start">
-                    <FaMapMarkerAlt className="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-900">Our Location</h4>
-                      <p className="text-sm text-gray-500">123 Electric Ave, London, UK</p>
+          <aside className="services-sidebar service-sidebar">
+            <div className="services-sidebar__card service-sidebar__card">
+              <div className="services-sidebar__body service-sidebar__body">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Contact Information</h3>
+                <div className="space-y-5">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                        <FaMapMarkerAlt className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="text-md font-medium text-gray-900 service-sidebar__info-title">Our Location</h4>
+                      <p className="text-gray-600">68 MacArthur Wynd</p>
+                      <p className="text-gray-600">Glasgow, G72 7GA</p>
                     </div>
                   </div>
-                  <div className="mt-4 flex items-start">
-                    <FaClock className="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-900">Working Hours</h4>
-                      <p className="text-sm text-gray-500">Mon-Fri: 8:00 AM - 6:00 PM</p>
-                      <p className="text-sm text-gray-500">Sat: 9:00 AM - 4:00 PM</p>
-                      <p className="text-sm text-gray-500">Emergency: 24/7</p>
+
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                        <FaPhoneAlt className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="text-md font-medium text-gray-900 service-sidebar__info-title">Phone</h4>
+                      <p className="text-gray-600">0141 642 0611</p>
+                      <p className="text-gray-500 text-sm">Mon-Fri: 8:00 AM - 6:00 PM</p>
+                      <p className="mt-1">
+                        <a href="tel:+441416420611" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Call us now →</a>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                        <FaEnvelope className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="text-md font-medium text-gray-900 service-sidebar__info-title">Email</h4>
+                      <p className="text-gray-600">hes.glasgow@gmail.com</p>
+                      <p className="text-gray-500 text-sm">We'll respond within 24 hours</p>
+                      <p className="mt-1">
+                        <a href="mailto:hes.glasgow@gmail.com" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Send us an email →</a>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                        <FaClock className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="text-md font-medium text-gray-900 service-sidebar__info-title">Opening Hours</h4>
+                      <dl className="text-gray-600 text-sm">
+                        <div className="flex justify-between"><dt>Mon - Fri</dt><dd>8:00 AM - 6:00 PM</dd></div>
+                      </dl>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            
+          </aside>
+        </div>
+      </div>
+
+      {/* Additional Sections (full width outside the grid) */}
+      <div className="services-additional-sections">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-blue services-copy service-copy max-w-none">
+            {/* Duplicated home-features section */}
+            <div className="bg-white py-16 home-features">
+              <div className="">
+                <div className="max-w-3xl mb-16 home-features__intro">
+                  <span className="supertext">Qualified and experienced electricians</span>
+                  <h2 className="section-title">
+                    Professional, qualified Electricians in Glasgow
+                  </h2>
+                </div>
+                <div className="relative home-features__wrap">
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 home-features__grid">
+                    <div className="flex flex-col home-feature">
+                        <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                          <Shield01Icon className="w-5 h-5" />
+                        </div>
+                        <h4>NICEIC Certified</h4>
+                      <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                        <p className="flex-auto">We're fully qualified and certified to the highest industry standards.</p>
+                      </dd>
+                    </div>
+
+                    <div className="flex flex-col home-feature">
+                        <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                          <Clock01Icon className="w-5 h-5" />
+                        </div>
+                        <h4>Same Day Service</h4>
+                      <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                        <p className="flex-auto">Emergency call-outs available when you need us most.</p>
+                      </dd>
+                    </div>
+
+                    <div className="flex flex-col home-feature">
+                        <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                          <PoundIcon className="w-5 h-5" />
+                        </div>
+                        <h4>Transparent Pricing</h4>
+                      <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                        <p className="flex-auto">No hidden fees or surprise charges. We provide clear, upfront pricing for all services.</p>
+                      </dd>
+                    </div>
+                    <div className="flex flex-col home-feature">
+                        <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                          <Certificate01Icon className="w-5 h-5" />
+                        </div>
+                        <h4>Years of Experience</h4>
+                      <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                        <p className="flex-auto">Decades of hands-on experience delivering reliable electrical work across Glasgow.</p>
+                      </dd>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {service.faqs && service.faqs.length > 0 && (
+              <div className="mt-10 service-faqs">
+                <h2 className="section-title">Frequently Asked Questions</h2>
+                <div className="space-y-4 service-faqs__list">
+                  {service.faqs.map((faq, index) => (
+                    <div key={index} className="bg-gray-50 rounded-lg service-faqs__item border border-gray-200">
+                      <button
+                        type="button"
+                        className="w-full text-left p-4 flex items-center justify-between"
+                        onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                        aria-expanded={openFaq === index}
+                        aria-controls={`faq-panel-${index}`}
+                      >
+                        <h4 className="font-medium text-gray-900 service-faqs__question">{faq}</h4>
+                        <span className={`ml-4 transform transition-transform ${openFaq === index ? 'rotate-45' : ''}`}>+</span>
+                      </button>
+                      {openFaq === index && (
+                        <div id={`faq-panel-${index}`} className="px-4 pb-4 text-gray-600 text-sm service-faqs__answer">
+                          Contact us for detailed answers to this question.
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="bg-blue-700">
-        <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+      <div className="services-cta service-cta">
+        <div className="services-cta__inner service-cta__inner">
+          <h2 className="text-3xl font-extrabold sm:text-4xl">
             <span className="block">Ready to get started?</span>
             <span className="block">{service.cta}</span>
           </h2>
-          <a
-            href="/contact"
-            className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 sm:w-auto"
-          >
-            Contact Us Now
-          </a>
+          <div className="services-cta__actions service-cta__actions">
+            <a
+              href="/contact"
+              className="btn btn--light mt-8 service-cta__btn"
+            >
+              Contact Us Now
+            </a>
+          </div>
         </div>
       </div>
     </div>

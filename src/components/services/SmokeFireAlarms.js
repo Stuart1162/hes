@@ -20,9 +20,9 @@ const SmokeFireAlarms = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-gray-50 service-hero">
       {/* Hero Section */}
-      <section className="bg-red-700 text-white py-16">
+      <section className="bg-red-700 text-white hero-container">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="md:flex md:items-center md:justify-between">
             <div className="md:w-1/2">
@@ -38,10 +38,10 @@ const SmokeFireAlarms = () => {
                   Get a Free Quote
                 </a>
                 <a 
-                  href="tel:01415552233" 
-                  className="bg-red-600 hover:bg-red-800 text-white px-6 py-3 rounded-md font-medium text-center transition-colors"
+                  href="tel:01416420611" 
+                  className="bg-blue-600 hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium text-center transition-colors"
                 >
-                  Call Now: 0141 555 2233
+                  Call Now: 0141 642 0611
                 </a>
               </div>
             </div>

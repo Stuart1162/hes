@@ -20,9 +20,9 @@ const PatTesting = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-blue-700 text-white py-16">
+      <section className="bg-blue-700 text-white py-16 pt-60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="md:flex md:items-center md:justify-between">
             <div className="md:w-1/2">
@@ -38,16 +38,14 @@ const PatTesting = () => {
                   Get a Free Quote
                 </a>
                 <a 
-                  href="tel:01415552233" 
+                  href="tel:01416420611" 
                   className="bg-blue-600 hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium text-center transition-colors"
                 >
-                  Call Now: 0141 555 2233
+                  Call Now: 0141 642 0611
                 </a>
               </div>
             </div>
-            <div className="hidden md:block md:w-1/2 pl-12">
-              <FaClipboardCheck className="h-48 w-48 text-blue-300 mx-auto" />
-            </div>
+          
           </div>
         </div>
       </section>

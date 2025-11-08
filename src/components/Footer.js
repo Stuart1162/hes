@@ -4,18 +4,17 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-6">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-4 flex items-center">
-              <span className="text-yellow-400 mr-2">⚡</span>
               Henderson Electrical Services
             </h3>
             <p className="text-gray-400 mb-4">
               Professional, reliable electrical services for homes and businesses across Glasgow and surrounding areas. Fully certified and insured electricians you can trust.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <FaFacebook className="h-6 w-6" />
               </a>
@@ -28,7 +27,7 @@ const Footer = () => {
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <FaLinkedin className="h-6 w-6" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -64,23 +63,23 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <FaMapMarkerAlt className="h-5 w-5 text-yellow-400 mt-1 mr-3 flex-shrink-0" />
-                <span className="text-gray-400">Glasgow,<br />Scotland, UK</span>
+                <span className="text-gray-400">68 MacArthur Wynd,<br /> Cambuslang, Glasgow</span>
               </li>
               <li className="flex items-center">
                 <FaPhone className="h-5 w-5 text-yellow-400 mr-3 flex-shrink-0" />
-                <a href="tel:+441415552233" className="text-gray-400 hover:text-yellow-400 transition-colors">0141 555 2233</a>
+                <a href="tel:+441416420611" className="text-gray-400 hover:text-yellow-400 transition-colors">0141 642 0611</a>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="h-5 w-5 text-yellow-400 mr-3 flex-shrink-0" />
-                <a href="mailto:info@hendersonelectrical.co.uk" className="text-gray-400 hover:text-yellow-400 transition-colors">info@hendersonelectrical.co.uk</a>
+                <a href="mailto:hes.glasgow@gmail.com" className="text-gray-400 hover:text-yellow-400 transition-colors">hes.glasgow@gmail.com</a>
               </li>
             </ul>
             <div className="mt-6">
               <h4 className="font-medium mb-2">Opening Hours</h4>
               <p className="text-sm text-gray-400">
                 Mon-Fri: 8:00 AM - 6:00 PM<br />
-                Sat: 9:00 AM - 4:00 PM<br />
-                Sun: Emergency callouts 24/7
+                Sat: Emergency callouts<br />
+                Sun: Emergency callouts
               </p>
             </div>
           </div>

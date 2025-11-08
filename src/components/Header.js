@@ -1,44 +1,74 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import '../styles/navbar.css';
 
-// ServiceCard component for the services dropdown (simplified without images)
+// ServiceCard component for the services dropdown
 const ServiceCard = ({ title, description, to, onClick }) => (
   <NavLink
     to={to}
     onClick={onClick}
-    className="block px-4 py-3 rounded-md hover:bg-blue-50 group transition-colors duration-150"
+    className="navbar__service-card"
   >
-    <h4 className="font-medium text-gray-900 group-hover:text-blue-600">{title}</h4>
-    {description && <p className="mt-1 text-sm text-gray-600">{description}</p>}
+    <h4 className="navbar__service-card-title">{title}</h4>
+    {description && <p className="navbar__service-card-description">{description}</p>}
   </NavLink>
 );
 
 const Header = () => {
-  const [open, setOpen] = useState(false); // services dropdown
+  const [open, setOpen] = useState(false); // services dropdown (desktop)
   const [mobileOpen, setMobileOpen] = useState(false); // mobile menu
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false); // services submenu (mobile)
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
   const menuRef = useRef(null);
 
   // Close dropdown on Escape and outside click
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
-    const onClick = (e) => { if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false); };
+    const onClick = (e) => {
+      // When mobile menu is open, do not apply desktop outside-click logic
+      if (mobileOpen) return;
+      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
+    };
+    
+    // Handle scroll for navbar
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
     document.addEventListener('keydown', onKey);
     document.addEventListener('mousedown', onClick);
+    window.addEventListener('scroll', handleScroll);
+    
     return () => {
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('mousedown', onClick);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrolled, mobileOpen]);
+
+  // Close mobile services submenu when mobile menu closes
+  useEffect(() => {
+    if (!mobileOpen && mobileServicesOpen) {
+      setMobileServicesOpen(false);
+    }
+  }, [mobileOpen, mobileServicesOpen]);
+
+  // Close mobile menu and submenu on route change
+  useEffect(() => {
+    if (mobileOpen) setMobileOpen(false);
+    if (mobileServicesOpen) setMobileServicesOpen(false);
+  }, [location.pathname]);
+
   // Custom NavLink component with active class
   const CustomNavLink = ({ to, children, className = '', ...props }) => (
     <NavLink
       to={to}
       className={({ isActive }) => 
-        `px-4 py-2 rounded-md transition-colors duration-200 ${
-          isActive 
-            ? 'text-white bg-blue-600 hover:bg-blue-700' 
-            : 'text-gray-700 hover:bg-gray-100'
-        } ${className}`
+        `navbar__link ${isActive ? 'navbar__link--active' : ''} ${className}`
       }
       {...props}
     >
@@ -47,201 +77,171 @@ const Header = () => {
   );
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <NavLink to="/" className="flex-shrink-0 flex items-center hover:opacity-90 transition-opacity">
-              <span className="text-yellow-400 text-2xl mr-2" aria-hidden>⚡</span>
-              <span className="text-xl font-bold text-gray-900">Henderson Electrical Services</span>
-            </NavLink>
-          </div>
+    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+      <div className="navbar__container">
+        {/* Logo */}
+        <NavLink to="/" className="navbar__logo">
+          <img src="/assets/img/logo.png" alt="Henderson Electrical Services" className="navbar__logo-img" />
+          <span className="navbar__logo-text navbar__logo-text--long">Henderson Electrical Services</span>
+          <span className="navbar__logo-text navbar__logo-text--short">HES</span>
+        </NavLink>
+        
+        {/* Desktop Navigation */}
+        <nav className="navbar__nav">
+          <CustomNavLink to="/about">About</CustomNavLink>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-1">
-            <CustomNavLink to="/domestic">Domestic</CustomNavLink>
-            <CustomNavLink to="/commercial">Commercial</CustomNavLink>
-            <CustomNavLink to="/landlords">Landlords</CustomNavLink>
-            
-            {/* Services Dropdown - Full Width */}
-            <div className="relative" ref={menuRef}>
-              <div className="relative group">
-                <button
-                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200 flex items-center"
-                  onClick={() => setOpen(!open)}
-                  onKeyDown={(e) => {
-                    if ((e.key === 'Enter' || e.key === ' ') && !open) {
-                      e.preventDefault();
-                      setOpen(true);
-                    }
-                    if (e.key === 'Escape') setOpen(false);
-                  }}
-                  onMouseEnter={() => setOpen(true)}
-                  aria-expanded={open}
-                  aria-haspopup="true"
-                >
-                  Services
-                  <svg className="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-                
-                {/* Full-width dropdown panel */}
-                {open && (
-                  <div 
-                    className="fixed left-0 right-0 mt-2 bg-white shadow-lg z-50 border-t border-gray-100"
-                    role="menu"
-                    onMouseLeave={() => setOpen(false)}
-                  >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                      <div className="grid grid-cols-4 gap-8">
-                        {/* Residential Services */}
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Residential Services</h3>
-                          <div className="space-y-2">
-                            <ServiceCard 
-                              title="Lighting & Fixtures"
-                              description="LED upgrades, smart lighting, and more"
-                              to="/service/lighting"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="Sockets & Switches"
-                              description="Installation and upgrades"
-                              to="/service/sockets"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="Consumer Units"
-                              description="Fuse box upgrades and replacements"
-                              to="/service/consumer-unit"
-                              onClick={() => setOpen(false)}
-                            />
-                          </div>
-                        </div>
-                        
-                        {/* Testing & Safety */}
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Testing & Safety</h3>
-                          <div className="space-y-2">
-                            <ServiceCard 
-                              title="EICR Testing"
-                              description="Electrical safety inspections"
-                              to="/eicr"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="PAT Testing"
-                              description="Portable appliance testing"
-                              to="/service/pat-testing"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="Fault Finding"
-                              description="Diagnose and fix electrical issues"
-                              to="/service/fault-finding"
-                              onClick={() => setOpen(false)}
-                            />
-                          </div>
-                        </div>
-                        
-                        {/* Commercial & Business */}
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Commercial</h3>
-                          <div className="space-y-2">
-                            <ServiceCard 
-                              title="Business Solutions"
-                              description="Complete electrical services for businesses"
-                              to="/commercial"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="Landlord Services"
-                              description="Compliance and safety for rental properties"
-                              to="/landlords"
-                              onClick={() => setOpen(false)}
-                            />
-                            <ServiceCard 
-                              title="EV Chargers"
-                              description="Installation and maintenance"
-                              to="/service/ev-chargers"
-                              onClick={() => setOpen(false)}
-                            />
-                          </div>
-                        </div>
-                        
-                        {/* View All Services & Support */}
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">All Services</h3>
-                            <a 
-                              href="/services" 
-                              className="block w-full text-center border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-2 px-4 rounded-md transition-colors duration-200"
-                              onClick={() => setOpen(false)}
-                            >
-                              View All Services
-                            </a>
-                          </div>
-                          
-                          <div className="bg-blue-50 p-4 rounded-lg">
-                            <h4 className="font-medium text-gray-900 mb-2">Need help choosing a service?</h4>
-                            <p className="text-sm text-gray-600 mb-4">Our experts are here to help you find the right solution for your needs.</p>
-                            <a 
-                              href="/contact" 
-                              className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-                              onClick={() => setOpen(false)}
-                            >
-                              Contact Us
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <CustomNavLink to="/eicr">EICR</CustomNavLink>
-            <CustomNavLink to="/get-a-quote" className="ml-2 bg-blue-600 text-white hover:bg-blue-700">Get a Quote</CustomNavLink>
-          </div>
-          
-          {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-              aria-expanded={mobileOpen}
+          {/* Services Dropdown */}
+          <div className="relative" ref={menuRef}>
+            <button 
+              onClick={() => setOpen(!open)}
+              className={`navbar__link ${open ? 'navbar__link--active' : ''}`}
             >
-              <span className="sr-only">Open main menu</span>
-              {!mobileOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              )}
+              Services
+              <span className="ml-1 text-xs" aria-hidden>▼</span>
             </button>
+            
+            {open && (
+              <div className="navbar__dropdown absolute left-0 mt-1 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-1 z-10">
+                <div className="grid gap-1 p-2">
+                  <ServiceCard 
+                    to="/domestic"
+                    title="Domestic Services"
+                    description="For homes and flats"
+                    onClick={() => setOpen(false)}
+                  />
+                  <ServiceCard 
+                    to="/commercial"
+                    title="Commercial Services"
+                    description="For businesses and offices"
+                    onClick={() => setOpen(false)}
+                  />
+                  <ServiceCard 
+                    to="/landlords"
+                    title="Landlord Services"
+                    description="For property owners"
+                    onClick={() => setOpen(false)}
+                  />
+                  <div className="px-4 py-2">
+                    <NavLink 
+                      to="/services" 
+                      className="navbar__service-card text-center text-blue-600 hover:text-blue-800 text-sm font-medium mt-1"
+                      onClick={() => setOpen(false)}
+                    >
+                      View all services →
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+          <CustomNavLink to="/eicr">EICR</CustomNavLink>
+          <CustomNavLink to="/contact">Contact</CustomNavLink>
+          <NavLink 
+            to="/get-a-quote" 
+            className="navbar__link navbar__link--cta ml-2"
+          >
+            Get a Quote
+          </NavLink>
+        </nav>
+
+        {/* Mobile menu button */}
+        <button 
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="navbar__mobile-button md:hidden"
+          aria-expanded={mobileOpen}
+          aria-label="Toggle navigation"
+        >
+          {mobileOpen ? (
+            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
       </div>
-      
+
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-            <CustomNavLink to="/" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>Home</CustomNavLink>
-            <CustomNavLink to="/domestic" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>Domestic</CustomNavLink>
-            <CustomNavLink to="/commercial" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>Commercial</CustomNavLink>
-            <CustomNavLink to="/landlords" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>Landlords</CustomNavLink>
-            <CustomNavLink to="/eicr" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>EICR</CustomNavLink>
-            <CustomNavLink to="/services" className="block px-3 py-2 rounded-md text-base font-medium" onClick={() => setMobileOpen(false)}>All Services</CustomNavLink>
-            <CustomNavLink to="/get-a-quote" className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700" onClick={() => setMobileOpen(false)}>Get a Quote</CustomNavLink>
+      <div className={`navbar__mobile-menu ${mobileOpen ? 'navbar__mobile-menu--open' : ''}`} onMouseDown={(e) => e.stopPropagation()}>
+        <nav className="space-y-1 px-2 pt-2 pb-3">
+          <CustomNavLink 
+            to="/about" 
+            className="block"
+            onClick={() => setMobileOpen(false)}
+          >
+            About
+          </CustomNavLink>
+          
+          <div>
+            <button 
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              className="navbar__link w-full text-left flex justify-between items-center"
+            >
+              Services
+              <span className="ml-2 text-xs">{mobileServicesOpen ? '▲' : '▼'}</span>
+            </button>
+            {mobileServicesOpen && (
+              <div className="pl-4 mt-1 space-y-1">
+                <NavLink 
+                  to="/domestic" 
+                  className="navbar__link block"
+                  onClick={() => {
+                    setMobileServicesOpen(false);
+                    setMobileOpen(false);
+                  }}
+                >
+                  Domestic Services
+                </NavLink>
+                <NavLink 
+                  to="/commercial" 
+                  className="navbar__link block"
+                  onClick={() => {
+                    setMobileServicesOpen(false);
+                    setMobileOpen(false);
+                  }}
+                >
+                  Commercial Services
+                </NavLink>
+                <NavLink 
+                  to="/landlords" 
+                  className="navbar__link block"
+                  onClick={() => {
+                    setMobileServicesOpen(false);
+                    setMobileOpen(false);
+                  }}
+                >
+                  Landlord Services
+                </NavLink>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+          
+          <CustomNavLink 
+            to="/eicr" 
+            className="block"
+            onClick={() => setMobileOpen(false)}
+          >
+            EIRC
+          </CustomNavLink>
+
+          <CustomNavLink 
+            to="/contact" 
+            className="block"
+            onClick={() => setMobileOpen(false)}
+          >
+            Contact
+          </CustomNavLink>
+          <NavLink 
+            to="/get-a-quote" 
+            className="navbar__link navbar__link--cta block mt-2 text-center"
+            onClick={() => setMobileOpen(false)}
+          >
+            Get a Quote
+          </NavLink>
+        </nav>
+      </div>
     </header>
   );
 };

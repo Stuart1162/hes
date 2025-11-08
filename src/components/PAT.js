@@ -2,7 +2,7 @@ import React from 'react';
 
 const PAT = () => {
   return (
-    <main>
+    <main className="single-service-page">
       <section className="hero" style={{paddingTop: 36}}>
         <div className="container">
           <h1 style={{marginBottom: 8}}>Portable Appliance Testing (PAT)</h1>

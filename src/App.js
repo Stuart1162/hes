@@ -24,11 +24,12 @@ import SmokeFireAlarms from './components/services/SmokeFireAlarms';
 import AreasCovered from './components/AreasCovered';
 import SitemapPage from './pages/SitemapPage';
 import SEO from './components/SEO';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 site-container">
       <Helmet>
         <title>Your Electrician Glasgow | Professional Electrical Services</title>
         <meta name="description" content="Professional electrician services in Glasgow. 24/7 emergency electrical services, EICR testing, and more. Fully certified and insured electricians." />
@@ -37,11 +38,28 @@ function App() {
       </Helmet>
       <Router>
         <SEO />
-        <div className="fixed top-0 left-0 right-0 z-50">
+        <ScrollToTop />
+        <div className="fixed top-5 left-0 right-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Header />
           </div>
         </div>
+
+        {/* Fixed WhatsApp Tab */}
+        <a
+          href="https://wa.me/441234567890?text=Hi%20there%2C%20I%27d%20like%20to%20get%20a%20quote."
+          className="whatsapp-tab"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="whatsapp-tab__icon" aria-hidden="true">
+            <path fill="#fff" d="M19.11 17.46c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.62.14-.19.27-.71.87-.87 1.05-.16.18-.32.2-.6.07-.27-.14-1.15-.42-2.2-1.34-.81-.72-1.36-1.6-1.52-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.49-.85-2.04-.22-.53-.45-.46-.62-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.84c.14.18 1.93 2.96 4.68 4.16.65.28 1.16.45 1.55.58.65.21 1.25.18 1.72.11.52-.08 1.58-.64 1.8-1.26.22-.62.22-1.16.16-1.27-.07-.11-.25-.18-.52-.32z"/>
+            <path fill="#fff" d="M16 3C8.83 3 3 8.83 3 16c0 2.28.62 4.41 1.69 6.24L3 29l6.92-1.82A12.92 12.92 0 0 0 16 29c7.17 0 13-5.83 13-13S23.17 3 16 3zm0 23.5c-2.2 0-4.23-.72-5.88-1.93l-.42-.31-4.02 1.06 1.08-3.91-.32-.41A9.5 9.5 0 1 1 16 26.5z"/>
+          </svg>
+          <span className="whatsapp-tab__text">WhatsApp</span>
+        </a>
+
         <div className="w-full">
           <Switch>
             <Route path='/' exact component={Home} />
@@ -67,6 +85,7 @@ function App() {
             <Route path='/service/smoke-fire-alarms' component={SmokeFireAlarms} />
             <Route path='/contact' component={Contact} />
             <Route path='/quote' component={QuoteForm} />
+            <Route path='/get-a-quote' component={QuoteForm} />
             <Route path='/locations' component={Locations} />
             <Route path='/location/:id' component={LocationPage} />
             <Route path='/areas-covered' component={AreasCovered} />

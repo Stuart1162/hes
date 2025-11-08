@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/customertype.css';
+import '../styles/homepage.css';
 import { NavLink } from 'react-router-dom';
 import { FaBuilding, FaClipboardCheck, FaLightbulb, FaPlug, FaTools, FaShieldAlt, FaFireExtinguisher, FaBolt, FaSearch, FaClock, FaUserTie, FaDollarSign } from 'react-icons/fa';
 
@@ -71,17 +73,43 @@ const Commercial = () => {
   ];
 
   return (
-    <main className="bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-800 to-blue-900 text-white py-20 lg:py-28">
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Commercial Electrical Services</h1>
-            <p className="text-xl md:text-2xl text-blue-100">
+    <main className="customer-type-page">
+      {/* Hero Section (copied from Domestic with stickers) */}
+      <section className="ct-hero relative py-20 lg:py-28">
+        <div className="ct-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="home-hero__title-wrap">
+              <h1 className="ct-hero-title">Powering Your Business</h1>
+              {/* Stickers */}
+              <img
+                src="/assets/img/laptop.png"
+                alt=""
+                className="home-hero__sticker home-hero__sticker--a"
+                style={{ left: '-7%', top: '-10%', transform: 'scale(1.1) rotate(-6deg)' }}
+              />
+              <img
+                src="/assets/img/computer.png"
+                alt=""
+                className="home-hero__sticker home-hero__sticker--b"
+                style={{ right: '7%', top: '-2%', transform: 'scale(1.1)' }}
+              />
+              <img
+                src="/assets/img/till.png"
+                alt=""
+                className="home-hero__sticker home-hero__sticker--c"
+                style={{ left: '-12%', bottom: '-60%', transform: 'scale(1.1) rotate(6deg)' }}
+              />
+              <img
+                src="/assets/img/kettle.png"
+                alt=""
+                className="home-hero__sticker home-hero__sticker--d"
+                style={{ right: '-10%', bottom: '-55%', transform: 'scale(1.1)' }}
+              />
+            </div>
+            <p className="text-xl md:text-2xl">
               Dependable electrical contracting for offices, retail, hospitality and light industrial.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <div className="mt-8 sm:flex-row gap-4 text-center mx-auto">
               <a 
                 href="/contact" 
                 className="bg-white text-blue-700 hover:bg-blue-50 font-semibold py-3 px-8 rounded-md text-center transition-colors duration-200"
@@ -100,8 +128,8 @@ const Commercial = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="ct-section bg-white">
+        <div className="ct-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-blue-600 font-semibold">OUR EXPERTISE</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Commercial Electrical Solutions</h2>
@@ -111,10 +139,10 @@ const Commercial = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="ct-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+              <div key={index} className="ct-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+                <div className="ct-card__icon w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
@@ -138,18 +166,18 @@ const Commercial = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="ct-section bg-gray">
+        <div className="ct-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-blue-600 font-semibold">WHY CHOOSE US</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Trusted Commercial Partner</h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="ct-grid ct-grid--4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center">
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="ct-benefit bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center">
+                <div className="ct-benefit__icon bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   {benefit.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
@@ -161,8 +189,8 @@ const Commercial = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-800 text-white">
-        <div className="container mx-auto px-4 text-center">
+      <section className="ct-cta">
+        <div className="ct-container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Power Your Business?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-100">
             Contact us today for reliable, professional electrical services for your commercial property.

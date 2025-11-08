@@ -1,0 +1,206 @@
+/* ======================
+   NAVBAR COMPONENT
+   ====================== */
+
+/* Base Navbar */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.navbar--scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Navbar Container */
+.navbar__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem; /* 64px */
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__logo:hover {
+  opacity: 0.9;
+}
+
+.navbar__logo-icon {
+  color: #f59e0b; /* Yellow-500 */
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.navbar__logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937; /* Gray-900 */
+}
+
+/* By default, hide the short title */
+.navbar__logo-text--short {
+  display: none;
+}
+
+/* Logo image */
+.navbar__logo-img {
+  height: 28px;
+  width: auto;
+  margin-right: 0.5rem;
+  display: block;
+}
+
+/* Navigation Links */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar__link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  color: #374151; /* Gray-700 */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.navbar__link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #111827; /* Gray-900 */
+}
+
+.navbar__link--active {
+  background-color: #fafafa; /* Blue-600 */
+}
+
+
+.navbar__link--cta {
+  background-color: #ffc700;
+  font-weight: 600;
+  color:#222;
+}
+
+.navbar__link--cta:hover {
+  background-color: #F1BC00;
+}
+
+/* Mobile Menu Button */
+.navbar__mobile-button {
+  display: none; /* Hidden by default, shown on mobile */
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: #4b5563; /* Gray-600 */
+  transition: all 0.2s ease;
+}
+
+.navbar__mobile-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #111827; /* Gray-900 */
+}
+
+/* Mobile Menu */
+.navbar__mobile-menu {
+  position: fixed;
+  top: calc(4rem + 1px); /* Navbar height + 20px page offset */
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 40;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  /* Prevent intercepting clicks when closed */
+  pointer-events: none;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.navbar__mobile-menu--open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Service Card in Dropdown */
+.navbar__service-card {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.navbar__service-card:hover {
+  background-color: #f3f4f6; /* Gray-100 */
+}
+
+.navbar__service-card h4 {
+  font-weight: 500;
+  color: #111827; /* Gray-900 */
+  margin: 0;
+}
+
+.navbar__service-card p {
+  margin: 0rem 0 0 0;
+  font-size: 0.875rem;
+  color: #6b7280; /* Gray-500 */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .navbar__nav {
+    display: none; /* Hide desktop nav on mobile */
+  }
+  
+  .navbar__mobile-button {
+    display: block; /* Show mobile menu button */
+  }
+
+  /* On mobile, show short title and hide long title */
+  .navbar__logo-text--long {
+    display: none;
+  }
+  .navbar__logo-text--short {
+    display: inline;
+  }
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar__dropdown {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@media (max-width: 640px) {
+  .navbar__link {
+    padding:1rem 0.5rem;
+  }
+
+  .navbar__mobile-menu {
+    padding:0 0.5rem 1rem;
+  }
+}

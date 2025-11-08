@@ -1,12 +1,49 @@
 import React from 'react';
 import { FaTools, FaShieldAlt, FaHome, FaBuilding, FaUserTie, FaCheckCircle } from 'react-icons/fa';
+import { Shield01Icon, Clock01Icon, PoundIcon, Certificate01Icon, CheckmarkCircle01Icon } from 'hugeicons-react';
+import '../styles/about.css';
+import '../styles/homepage.css';
 
 const About = () => {
   const stats = [
-    { value: '15+', label: 'Years Experience' },
-    { value: '5000+', label: 'Happy Customers' },
-    { value: '24/7', label: 'Emergency Service' },
-    { value: '100%', label: 'Satisfaction Guaranteed' },
+    {
+      icon: Shield01Icon,
+      title: 'NICEIC Certified',
+      description: "We're fully qualified and certified to the highest industry standards.",
+    },
+    {
+      icon: Clock01Icon,
+      title: 'Same Day Service',
+      description: 'Emergency call-outs available when you need us most.',
+    },
+    {
+      icon: PoundIcon,
+      title: 'Transparent Pricing',
+      description: 'No hidden fees or surprise charges. We provide clear, upfront pricing for all services.',
+    },
+    {
+      icon: Certificate01Icon,
+      title: 'Years of Experience',
+      description: 'Decades of hands-on experience delivering reliable electrical work across Glasgow.',
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "We would highly recommend this family run business. Their communication is excellent with Angela updating us on progress- times for inspection visits and agreeing a date for work to start.",
+      author: "Marie",
+      rating: 5
+    },
+    {
+      quote: "Henderson's went above and beyond. We are extremely pleased with the results and we highly recommend Henderson Electrical Services to anyone looking for a reliable electrician. We would definitely use them again in the future!",
+      author: "Millar",
+      rating: 5
+    },
+    {
+      quote: "Would highly recommend Henderson Electrical Services having used them recently to review and update the electrics in the flat. Professional, friendly, thorough, and prompt to reply; we were very impressed with the work undertaken and would definitely use them again.",
+      author: "Bryan",
+      rating: 5
+    }
   ];
 
   const team = [
@@ -31,153 +68,242 @@ const About = () => {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="about-page">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Henderson Electrical Services</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Delivering exceptional electrical services across Glasgow with expertise, integrity, and a commitment to excellence since 2008.
+      <section
+        className="about-hero"
+        style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/glasgow3.png)` }}
+      >
+        <div className="about-hero__overlay"></div>
+        <div className="about-hero__content">
+          <h1 className="about-hero__title">Family-run, Glasgow-based</h1>
+          <p className="about-hero__subtitle">
+            Delivering exceptional electrical services across Glasgow
           </p>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+       <section className="home-reviews">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center p-6 bg-white rounded-lg shadow-md">
-                <div className="text-3xl font-bold text-blue-600">{stat.value}</div>
-                <div className="mt-2 text-gray-600">{stat.label}</div>
+          <div className="home-reviews__row">
+            <div className="home-reviews__brand">
+              <img src="/assets/img/google.png" alt="Google" className="home-reviews__logo" />
+              <div className="home-reviews__rating">
+                <span className="home-reviews__stars">★★★★★</span>
+                <span className="home-reviews__text">4.8/5 on Google Reviews</span>
               </div>
-            ))}
+            </div>
+            <div className="home-reviews__carousel" aria-label="Customer reviews">
+              <div className="home-reviews__track">
+                {[...testimonials, ...testimonials].map((t, i) => (
+                  <div key={i} className="home-reviews__quote">“{t.quote}”</div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-16">
+      <section className="py-16 bg-white about-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:flex lg:items-center lg:space-x-12">
-            <div className="lg:w-1/2 mb-10 lg:mb-0">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <div className="space-y-4 text-gray-600">
+          <div className="grid gap-12 lg:grid-cols-12 items-start">
+            <div className="lg:col-span-12">
+              <span className="supertext">Glasgow-based Electricians</span>
+              <h2 className="section-title">Friendly and Reliable Electrical Services in Glasgow</h2>
+              <div className="mt-6 space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Founded in 2008, Henderson Electrical Services began as a small family business with a simple mission: to provide reliable, high-quality electrical services with a personal touch. What started as a one-person operation has grown into a trusted team of certified electricians serving homes and businesses across Glasgow and surrounding areas.
+                  Whether it’s a full rewiring or simply fitting a new socket, we carry out all work to the same high, certified and friendly standard that has made us one of the most trusted electrical contractors in Glasgow.
                 </p>
                 <p>
-                  Our commitment to excellence and customer satisfaction has been the driving force behind our growth. We take pride in our work and stand behind every project we complete, no matter how big or small.
+                  Our electricians in Glasgow have the tools, knowledge, qualifications and experience to complete any size of job and offer you the best advice on any electrical home improvement issues you are having.
                 </p>
                 <p>
-                  Today, we continue to uphold the values we started with: honesty, integrity, and a commitment to doing the job right the first time.
+                  Our Glasgow electricians complete all work to NICEIC standards and will provide all of the paperwork and certificates having complete the job.
                 </p>
               </div>
-            </div>
-            <div className="lg:w-1/2">
-              <img 
-                src="https://images.unsplash.com/photo-1581093057306-e19f79c0f73a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
-                alt="Our team at work" 
-                className="rounded-lg shadow-xl w-full h-auto"
-              />
+              <ul className="mt-8 grid gap-4 sm:grid-cols-2 about-benefits">
+                <li className="flex items-start gap-3">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                    <CheckmarkCircle01Icon className="h-4 w-4 text-blue-700" />
+                  </span>
+                  <span className="benefit">NICEIC standards and certification</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                    <CheckmarkCircle01Icon className="h-4 w-4 text-blue-700" />
+                  </span>
+                  <span className="benefit">On time and on budget</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                    <CheckmarkCircle01Icon className="h-4 w-4 text-blue-700" />
+                  </span>
+                  <span className="benefit">Qualified, friendly and professional</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                    <CheckmarkCircle01Icon className="h-4 w-4 text-blue-700" />
+                  </span>
+                  <span className="benefit">Advice for any home improvement</span>
+                </li>
+              </ul>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <a href="/get-a-quote" className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-blue-600 text-white font-medium btn-blue">Get a free quote</a>
+                <a href="/contact" className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-blue-600 text-blue-700 font-medium hover:bg-blue-50 transition-colors">Contact us</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+
+      <div className="bg-white py-16 home-features">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-16 home-features__intro">
+            <span className="supertext">Qualified and experienced electricians</span>
+            <h2 className="section-title">
+              Professional, qualified Electricians in Glasgow
+            </h2>
+          </div>
+          <div className="relative home-features__wrap">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 home-features__grid">
+              <div className="flex flex-col home-feature">
+                  <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                    <Shield01Icon className="w-5 h-5" />
+                  </div>
+                  <h4>NICEIC Certified</h4>
+                <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">We're fully qualified and certified to the highest industry standards.</p>
+                </dd>
+              </div>
+
+              <div className="flex flex-col home-feature">
+                  <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                    <Clock01Icon className="w-5 h-5" />
+                  </div>
+                  <h4>Friendly Team</h4>
+                <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">We explain every job in simple terms and keep you informed every step of the way.</p>
+                </dd>
+              </div>
+
+              <div className="flex flex-col home-feature">
+                  <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                    <PoundIcon className="w-5 h-5" />
+                  </div>
+                  <h4>Transparent Pricing</h4>
+                <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">No hidden fees or surprise charges. We provide clear, upfront pricing for all services.</p>
+                </dd>
+              </div>
+              <div className="flex flex-col home-feature">
+                  <div className="icon flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                    <Certificate01Icon className="w-5 h-5" />
+                  </div>
+                  <h4>Years of Experience</h4>
+                <dd className="flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">Decades of hands-on experience delivering reliable electrical work across Glasgow.</p>
+                </dd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
 
       {/* Our Values */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Our Core Values</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              The principles that guide everything we do
+      <section className="about-values">
+        <div className="about-values__header">
+          <h2 className="about-values__title">1000s of Happy Customers</h2>
+          <p className="about-values__subtitle">
+            The principles that guide everything we do
+          </p>
+        </div>
+        
+        <div className="about-values__grid">
+          <div className="about-value">
+            <div className="about-value__icon">
+              <FaTools />
+            </div>
+            <h3 className="about-value__title">Expert Craftsmanship</h3>
+            <p className="about-value__description">
+              We take pride in our work and never cut corners. Every job is completed to the highest standards of quality and safety.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-md text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaTools className="text-blue-600 text-2xl" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Expert Craftsmanship</h3>
-              <p className="text-gray-600">
-                We take pride in our work and never cut corners. Every job is completed to the highest standards of quality and safety.
-              </p>
+          <div className="about-value">
+            <div className="about-value__icon">
+              <FaShieldAlt />
             </div>
-            
-            <div className="bg-white p-8 rounded-lg shadow-md text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaShieldAlt className="text-blue-600 text-2xl" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Safety First</h3>
-              <p className="text-gray-600">
-                Your safety is our top priority. We follow all safety protocols and ensure every installation meets current regulations.
-              </p>
+            <h3 className="about-value__title">Safety First</h3>
+            <p className="about-value__description">
+              Your safety is our top priority. We follow all safety protocols and ensure every installation meets current regulations.
+            </p>
+          </div>
+          
+          <div className="about-value">
+            <div className="about-value__icon">
+              <FaUserTie />
             </div>
-            
-            <div className="bg-white p-8 rounded-lg shadow-md text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaUserTie className="text-blue-600 text-2xl" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Customer Focus</h3>
-              <p className="text-gray-600">
-                We listen to your needs and provide personalized solutions that work best for your home or business.
-              </p>
-            </div>
+            <h3 className="about-value__title">Customer Focus</h3>
+            <p className="about-value__description">
+              We listen to your needs and provide personalized solutions that work best for your home or business.
+            </p>
           </div>
         </div>
       </section>
+
+      
+
+     
 
       {/* Our Team */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Meet Our Team</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              Experienced professionals dedicated to excellence
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900">{member.name}</h3>
-                  <p className="text-blue-600 font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-600">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* <section className="about-team">
+        <div className="about-team__header">
+          <h2 className="about-team__title">Meet Our Team</h2>
+          <p className="about-team__subtitle">
+            Experienced professionals dedicated to excellence
+          </p>
         </div>
-      </section>
+        
+        <div className="about-team__grid">
+          {team.map((member, index) => (
+            <div key={index} className="about-team-member">
+              <img 
+                src={member.image} 
+                alt={member.name} 
+                className="about-team-member__image"
+              />
+              <div className="about-team-member__info">
+                <h3 className="about-team-member__name">{member.name}</h3>
+                <p className="about-team-member__role">{member.role}</p>
+                <p className="about-team-member__bio">{member.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="bg-blue-700 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl mb-4">
-            Ready to experience the Henderson Electrical Services difference?
+      <section className="about-cta">
+        <div className="about-cta__content">
+          <h2 className="about-cta__title">
+            Need a hand with electrical work?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+          <p className="about-cta__subtitle">
             Contact us today for reliable, professional electrical services you can trust.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="about-cta__buttons">
             <a 
-              href="/contact" 
-              className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+              href="/get-a-quote" 
+              className="about-cta__button about-cta__button--primary"
             >
               Get a Free Quote
             </a>
             <a 
               href="tel:+441234567890" 
-              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-blue-600 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+              className="about-cta__button btn-white-outline"
             >
               Call Us Now
             </a>

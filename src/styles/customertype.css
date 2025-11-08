@@ -1,0 +1,67 @@
+/* Customer Type Pages (Domestic, Commercial, Landlords) */
+
+.customer-type-page { background:#f9fafb; }
+
+/* Hero */
+.ct-hero { 
+    position:relative; 
+    min-height: 600px;
+    background-color: #fafafa;
+    color:#222;
+}
+.ct-hero .ct-container { 
+    position:relative; z-index:10; 
+    text-align: center;
+}
+
+.ct-hero .ct-container p {
+    margin-top:2rem;
+}
+
+.ct-hero-title {
+    font-size:8.5rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -3px;
+    padding-top:2rem;
+}
+
+/* Sections */
+.ct-section { padding:4rem 0; }
+.ct-section.bg-white { background:#fff; }
+.ct-section.bg-gray { background:#f3f4f6; }
+
+/* Container */
+.ct-container {  }
+
+/* Grids */
+.ct-grid { display:grid; gap:2rem; }
+@media (min-width:768px){ .ct-grid--2 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width:1024px){ .ct-grid--3 { grid-template-columns: repeat(3, minmax(0,1fr)); } .ct-grid--4 { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+/* Cards */
+.ct-card { 
+    background:#fff; 
+    border-radius:12px;
+     border:1px solid #eaeaea; 
+     padding:1.5rem; 
+     box-shadow: none;
+     
+ }
+.ct-card:hover {  }
+.ct-card__icon { background:#e8f0ff; padding:0.75rem; border-radius:10px; margin-right:1rem; display:inline-flex; align-items:center; justify-content:center; }
+
+/* Benefits */
+.ct-benefit { background:#fff; border-radius:12px; box-shadow: none; text-align:center; padding:1.5rem; }
+.ct-benefit__icon { width:64px; height:64px; border-radius:9999px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; background:#e8f0ff; }
+
+/* CTA */
+.ct-cta { background:#1e3a8a; color:#fff; padding:4rem 0; text-align:center; }
+
+@media (max-width: 640px) {
+    .ct-hero-title {
+        font-size:5rem;
+        line-height: 1;
+        padding-top: 5rem;
+    }
+}

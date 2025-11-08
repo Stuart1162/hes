@@ -1,5 +1,8 @@
 import React from 'react';
-import { FaLightbulb, FaPlug, FaBolt, FaCarBattery, FaSearch, FaTools, FaCertificate, FaShieldAlt, FaCheck } from 'react-icons/fa';
+import { FaLightbulb, FaPlug, FaBolt, FaCarBattery, FaSearch, FaTools, FaCertificate, FaShieldAlt, FaCheck, FaClipboardCheck, FaShower } from 'react-icons/fa';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/homepage.css';
 
 const ServiceCard = ({ id, title, description, icon: Icon, features, cta }) => (
   <section id={id} className="py-16 scroll-mt-20">
@@ -29,7 +32,7 @@ const ServiceCard = ({ id, title, description, icon: Icon, features, cta }) => (
         <div className="lg:col-span-7 lg:pl-12">
           <div className="bg-gray-100 rounded-lg overflow-hidden">
             <img 
-              src={`/images/services/${id}.jpg`} 
+              src={`https://source.unsplash.com/800x600/?${id},electrical`} 
               alt={title} 
               className="w-full h-auto object-cover"
               onError={(e) => {
@@ -126,81 +129,237 @@ const Services = () => {
     }
   ];
 
+  const services = [
+    {
+      title: 'Fuseboards',
+      icon: FaBolt,
+      features: [
+        'Upgrades and replacements',
+        'RCD/RCBO installations',
+        'Full safety testing and certification',
+      ],
+      path: '/service/fuseboards',
+      image: '/assets/img/Fuseboards.png'
+    },
+    {
+      title: 'Smoke Alarms',
+      icon: FaShieldAlt,
+      features: [
+        'Interlinked smoke and heat detectors',
+        'Battery and mains-powered options',
+        'Landlord compliance certification',
+      ],
+      path: '/service/smoke-alarms',
+      image: '/assets/img/SmokeAlarms.png'
+    },
+    {
+      title: 'EICR Testing',
+      icon: FaClipboardCheck,
+      features: [
+        'Landlord safety certificates',
+        'Homebuyer electrical inspections',
+        'Detailed reports and remedial work',
+      ],
+      path: '/eicr',
+      image: '/assets/img/EICRTesting.png'
+    },
+    {
+      title: 'Lighting',
+      icon: FaLightbulb,
+      features: [
+        'LED lighting installations',
+        'Indoor and outdoor lighting',
+        'Smart lighting solutions',
+      ],
+      path: '/service/lighting',
+      image: '/assets/img/Lighting.png'
+    },
+    {
+      title: 'PAT Testing',
+      icon: FaPlug,
+      features: [
+        'Portable appliance testing',
+        'Landlord and business compliance',
+        'Certification provided',
+      ],
+      path: '/service/pat-testing',
+      image: '/assets/img/PATTesting.png'
+    },
+    {
+      title: 'Sockets',
+      icon: FaPlug,
+      features: [
+        'Additional power outlets',
+        'USB socket installations',
+        'Faulty socket repairs',
+      ],
+      path: '/service/sockets',
+      image: '/assets/img/Sockets.png'
+    },
+    {
+      title: 'Shower Installations',
+      icon: FaShower,
+      features: [
+        'Electric shower installations',
+        'Power shower upgrades',
+        'Bathroom electrical work',
+      ],
+      path: '/service/shower-installations',
+      image: '/assets/img/ShowerInstallations.png'
+    },
+    {
+      title: 'Rewiring',
+      icon: FaTools,
+      features: [
+        'Full and partial rewires',
+        'Period property rewiring',
+        'Minimal disruption guaranteed',
+      ],
+      path: '/service/rewiring',
+      image: '/assets/img/Rewiring.png'
+    },
+    {
+      title: 'Fault Finding',
+      icon: FaSearch,
+      features: [
+        'Diagnostic testing',
+        'Circuit fault location',
+        'Emergency callouts available',
+      ],
+      path: '/service/fault-finding',
+      image: '/assets/img/FaultFinding.png'
+    },
+    {
+      title: 'Electrical Repairs',
+      icon: FaTools,
+      features: [
+        'Fuse box repairs',
+        'Faulty wiring repairs',
+        'Lighting circuit issues',
+      ],
+      path: '/service/electrical-repairs',
+      image: '/assets/img/ElectricalRepairs.png'
+    },
+  ];
+
+  const [activeServiceTab, setActiveServiceTab] = useState('All');
+  const serviceTabs = ['All', 'Domestic', 'Commercial', 'Landlords'];
+
+  const getServiceCategories = (title) => {
+    const t = title.toLowerCase();
+    const cats = new Set();
+    if (/(eicr\s*testing|eicr\s*tests?)/.test(t)) cats.add('Landlords');
+    if (/(rewiring?)/.test(t)) cats.add('Landlords');
+    if (/(fuseboard|fuse board|consumer\s*unit|fuseboards)/.test(t)) cats.add('Landlords');
+    if (/(smoke\s*alarms?)/.test(t)) cats.add('Landlords');
+
+    if (/(eicr\s*testing|eicr\s*tests?)/.test(t)) cats.add('Commercial');
+    if (/(pat\s*testing|pat\s*tests?)/.test(t)) cats.add('Commercial');
+    if (/(rewiring?)/.test(t)) cats.add('Commercial');
+    if (/(fault\s*finding)/.test(t)) cats.add('Commercial');
+    if (/(fuseboard|fuse board|consumer\s*unit|fuseboards)/.test(t)) cats.add('Commercial');
+
+    if (/(lighting)/.test(t)) cats.add('Domestic');
+    if (/(fuseboard|fuse board|consumer\s*unit|fuseboards)/.test(t)) cats.add('Domestic');
+    if (/(smoke\s*alarms?)/.test(t)) cats.add('Domestic');
+    if (/(sockets?)/.test(t)) cats.add('Domestic');
+    if (/(shower|showers)/.test(t)) cats.add('Domestic');
+    if (/(rewiring?)/.test(t)) cats.add('Domestic');
+    if (/(fault\s*finding)/.test(t)) cats.add('Domestic');
+    if (/(electrical\s*repairs?)/.test(t)) cats.add('Domestic');
+
+    if (cats.size === 0) cats.add('Domestic');
+    return Array.from(cats);
+  };
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
-        <div className="absolute inset-0 bg-black opacity-40"></div>
+      <section className="relative py-20 services-list-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Electrical Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Electrical Services</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               From small fixes to full installations. Clear pricing, certified work, and tidy finishes.
             </p>
           </div>
-          
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {serviceSections.map((service) => (
-              <a
-                key={service.id}
-                href={`#${service.id}`}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-              >
-                {service.title.split(' ')[0]}
-              </a>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <div className="py-12 bg-gray-50">
+      <section id="services" className="home-services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Comprehensive Electrical Services
-            </h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              Professional solutions for all your electrical needs
-            </p>
+          <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 home-services__header">
+            <div>
+              <span className="supertext">Our services</span>
+              <h2 className="section-title">Our Electrical Services in Glasgow</h2>
+            </div>
+            <div className="home-services__tabs">
+              <div className="inline-flex flex-wrap gap-2 bg-white p-2 rounded-lg border border-gray-200 home-services__tabs-inner">
+                {serviceTabs.map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setActiveServiceTab(tab)}
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors home-services__tab ${
+                      activeServiceTab === tab
+                        ? 'bg-blue-600 text-white shadow'
+                        : 'bg-transparent text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {serviceSections.map((service) => (
-              <a
-                key={service.id}
-                href={`#${service.id}`}
-                className="group bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border-l-4 border-blue-600"
+          <div className="home-services__grid">
+            {services
+              .filter((s) =>
+                activeServiceTab === 'All' ? true : getServiceCategories(s.title).includes(activeServiceTab)
+              )
+              .map((service, index) => (
+              <Link 
+                key={index}
+                to={service.path || `/services#${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                className="home-service-card"
               >
-                <div className="flex items-center mb-4">
-                  <div className="bg-blue-100 p-3 rounded-full mr-4">
-                    <service.icon className="h-6 w-6 text-blue-600" />
+                <div className="home-service-card__content">
+                  <div className="flex flex-col items-start mb-4">
+                    <div className="bg-blue-100 p-3 mb-3 icon-container">
+                      <service.icon className="text-blue-600 text-xl" />
+                    </div>
+                    <h3 className="home-service-card__title">{service.title}</h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                    {service.title}
-                  </h3>
+                  <ul className="home-service-card__features">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="home-service-card__feature">
+                        <FaCheck className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                        <span className="text-gray-600">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-gray-600 text-sm">
-                  {service.description}
-                </p>
-                <div className="mt-4 flex items-center text-blue-600 text-sm font-medium">
-                  Learn more
-                  <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                <div className="h-48 overflow-hidden mt-4 img-container">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="home-service-card__image"
+                  />
                 </div>
-              </a>
+                <div className="p-6">
+                  <div className="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                    Learn more
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
+          
         </div>
-      </div>
-
-      {/* Detailed Service Sections */}
-      <div className="divide-y divide-gray-200">
-        {serviceSections.map((service) => (
-          <ServiceCard key={service.id} {...service} />
-        ))}
-      </div>
+      </section>
 
       {/* CTA Section */}
       <section className="bg-blue-700 text-white py-16">
