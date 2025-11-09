@@ -33,10 +33,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 site-container">
       <Helmet>
-        <title>Your Electrician Glasgow | Professional Electrical Services</title>
-        <meta name="description" content="Professional electrician services in Glasgow. 24/7 emergency electrical services, EICR testing, and more. Fully certified and insured electricians." />
+        <title>Henderson Electrical Services | Electrician Services Glasgow</title>
+        <meta name="description" content="HES - Professional electrician services in Glasgow. 24/7 emergency electrical services, EICR testing, and more. Fully certified and insured electricians." />
         <meta name="keywords" content="electrician glasgow, emergency electrician, electrical services, eicr testing, electrical repairs" />
-        <link rel="canonical" href="https://yourelectrician-glasgow.co.uk" />
+        <link rel="canonical" href="https://hesglasgow.com" />
       </Helmet>
       <Router>
         <SEO />
