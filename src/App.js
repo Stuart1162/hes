@@ -23,6 +23,8 @@ import OfficeLighting from './components/services/OfficeLighting';
 import SmokeFireAlarms from './components/services/SmokeFireAlarms';
 import AreasCovered from './components/AreasCovered';
 import SitemapPage from './pages/SitemapPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
 import SEO from './components/SEO';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
@@ -90,6 +92,8 @@ function App() {
             <Route path='/location/:id' component={LocationPage} />
             <Route path='/areas-covered' component={AreasCovered} />
             <Route path='/sitemap' component={SitemapPage} />
+            <Route path='/privacy-policy' component={PrivacyPolicyPage} />
+            <Route path='/terms' component={TermsPage} />
             {/* Fallback dynamic service route: must come after specific service routes */}
             <Route path='/service/:serviceId' component={ServiceTemplate} />
           </Switch>
