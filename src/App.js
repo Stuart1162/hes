@@ -34,7 +34,7 @@ function App() {
     <div className="min-h-screen bg-gray-100 site-container">
       <Helmet>
         <title>Henderson Electrical Services | Electrician Services Glasgow</title>
-        <meta name="description" content="HES - Professional electrician services in Glasgow. 24/7 emergency electrical services, EICR testing, and more. Fully certified and insured electricians." />
+        <meta name="description" content="HES - Professional electrician services in Glasgow. Emergency electrical services, EICR testing, and more. Fully certified and insured electricians." />
         <meta name="keywords" content="electrician glasgow, emergency electrician, electrical services, eicr testing, electrical repairs" />
         <link rel="canonical" href="https://hesglasgow.com" />
       </Helmet>
@@ -49,7 +49,7 @@ function App() {
 
         {/* Fixed WhatsApp Tab */}
         <a
-          href="https://wa.me/441234567890?text=Hi%20there%2C%20I%27d%20like%20to%20get%20a%20quote."
+          href="https://wa.me/447956557418?text=Hi%20there%2C%20I%27d%20like%20to%20get%20a%20quote%20for%20your%20electrical%20services."
           className="whatsapp-tab"
           target="_blank"
           rel="noopener noreferrer"

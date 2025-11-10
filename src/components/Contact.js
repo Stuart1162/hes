@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaCheckCircle } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,27 +21,53 @@ const Contact = () => {
     }));
   };
 
+  const form = useRef();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: ''
+    // EmailJS service configuration
+    const serviceID = 'service_iocnm9m'; // Replace with your EmailJS service ID
+    const templateID = 'template_w86r3do'; // Replace with your EmailJS template ID
+    const publicKey = 'GgYCGVN9dlQ33RCtl'; // Replace with your EmailJS public key
+    
+    // Send email to both recipients
+    const emailPromises = [
+      emailjs.sendForm(serviceID, templateID, form.current, publicKey, {
+        to_email: 'hes.glasgow@gmail.com',
+        ...formData
+      }),
+      emailjs.sendForm(serviceID, templateID, form.current, publicKey, {
+        to_email: '1162stu@gmail.com',
+        ...formData
+      })
+    ];
+
+    Promise.all(emailPromises)
+      .then((results) => {
+        console.log('Emails sent successfully!', results);
+        setSubmitSuccess(true);
+        // Reset form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to send emails:', error);
+        alert('Failed to send message. Please try again later.');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        // Hide success message after 5 seconds
+        if (submitSuccess) {
+          setTimeout(() => setSubmitSuccess(false), 5000);
+        }
       });
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => setSubmitSuccess(false), 5000);
-    }, 1500);
   };
 
   const services = [
@@ -99,7 +126,7 @@ const Contact = () => {
                   </div>
                 )}
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -138,7 +165,7 @@ const Contact = () => {
                         Phone Number
                       </label>
                       <input
-                        type="tel"
+                        type="text"
                         id="phone"
                         name="phone"
                         value={formData.phone}

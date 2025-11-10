@@ -1,5 +1,5 @@
 # robots.txt for https://yourelectrician-glasgow.co.uk
-# Generated on 2025-10-29
+# Generated on 2025-11-10
 
 User-agent: *
 Allow: /

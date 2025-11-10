@@ -341,7 +341,7 @@ Whether full or partial, our rewiring service brings your installation up to mod
       'Diagnostic testing',
       'Circuit fault location',
       'Emergency callouts available',
-      '24/7 emergency service',
+      'Eemergency service',
       'No fix, no fee guarantee',
       'Detailed fault report'
     ],
