@@ -13,7 +13,7 @@ const SmokeFireAlarms = () => {
 
   const benefits = [
     'Compliance with fire safety regulations',
-    '24/7 monitoring available',
+    'Monitoring available',
     'Reduced insurance premiums',
     'Peace of mind',
     'Professional installation and maintenance'

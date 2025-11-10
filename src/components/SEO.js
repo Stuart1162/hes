@@ -6,7 +6,7 @@ const SEO = ({ title, description, service, location = 'Glasgow' }) => {
   const { pathname } = useLocation();
   const siteUrl = 'https://yourelectrician-glasgow.co.uk';
   const defaultTitle = 'Professional Electrician Services in Glasgow';
-  const defaultDescription = 'Fully qualified and certified electricians serving Glasgow and surrounding areas. 24/7 emergency services, free quotes, and guaranteed workmanship.';
+  const defaultDescription = 'Fully qualified and certified electricians serving Glasgow and surrounding areas. Emergency services, free quotes, and guaranteed workmanship.';
   
   const seo = {
     title: title ? `${title} | ${defaultTitle}` : defaultTitle,

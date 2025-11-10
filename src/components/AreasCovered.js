@@ -39,7 +39,7 @@ const AreasCovered = () => {
             Our Coverage Area
           </h2>
           <p className="mt-1 text-sm text-blue-100">
-            We serve all these areas with our 24/7 emergency electrician services
+            We serve all these areas with our emergency electrician services
           </p>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -90,7 +90,7 @@ const AreasCovered = () => {
         <h3>Why Choose Our Local Electricians?</h3>
         <ul>
           <li>Fully qualified and certified electricians</li>
-          <li>24/7 emergency call-out service</li>
+          <li>Emergency call-outs available</li>
           <li>Competitive pricing with no hidden fees</li>
           <li>Same-day service available</li>
           <li>All work guaranteed</li>

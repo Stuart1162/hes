@@ -16,7 +16,7 @@ const EmergencyLighting = () => {
     'Ensure safe evacuation in emergencies',
     'Regular maintenance to keep systems operational',
     'Expert advice on emergency lighting requirements',
-    '24/7 emergency call-out service'
+    'Emergency call-out service'
   ];
 
   return (

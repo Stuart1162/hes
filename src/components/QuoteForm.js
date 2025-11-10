@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaUser, FaMapMarkerAlt, FaEnvelope, FaClipboard, FaCheckCircle, FaShieldAlt, FaClock } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const QuoteForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const form = useRef();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ success: null, message: '' });
 
@@ -12,16 +14,30 @@ const QuoteForm = () => {
     setSubmitStatus({ success: null, message: 'Submitting your request...' });
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // EmailJS configuration
+      const serviceID = 'service_iocnm9m';
+      const templateID = 'template_g5t90hg';
+      const publicKey = 'GgYCGVN9dlQ33RCtl';
+      
+      // Send a single email with both recipients
+      await emailjs.sendForm(serviceID, templateID, form.current, publicKey, {
+        to_email: 'hes.glasgow@gmail.com, 1162stu@gmail.com',
+        ...data
+      });
+      
       setSubmitStatus({
         success: true,
-        message: 'Thank you! Your quote request has been received.'
+        message: 'Thank you! Your quote request has been received. We\'ll get back to you soon.'
       });
+      
+      // Reset form after successful submission
+      reset();
+      
     } catch (error) {
+      console.error('Error sending emails:', error);
       setSubmitStatus({
         success: false,
-        message: 'Sorry, there was an error submitting your request.'
+        message: 'Sorry, there was an error submitting your request. Please try again later.'
       });
     } finally {
       setIsSubmitting(false);
@@ -86,7 +102,7 @@ const QuoteForm = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form ref={form} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -97,14 +113,15 @@ const QuoteForm = () => {
                       <FaUser className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
+                      {...register('first_name', { required: 'First name is required' })}
                       id="firstName"
+                      name="first_name"
                       type="text"
-                      {...register('firstName', { required: 'First name is required' })}
                       className="pl-10 block w-full rounded-lg border-0 py-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       placeholder="John"
                     />
                   </div>
-                  {errors.firstName && <ErrorMessage message={errors.firstName.message} />}
+                  {errors.first_name && <ErrorMessage message={errors.first_name.message} />}
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -115,14 +132,15 @@ const QuoteForm = () => {
                       <FaUser className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
+                      {...register('last_name', { required: 'Last name is required' })}
                       id="lastName"
+                      name="last_name"
                       type="text"
-                      {...register('lastName', { required: 'Last name is required' })}
                       className="pl-10 block w-full rounded-lg border-0 py-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       placeholder="Smith"
                     />
                   </div>
-                  {errors.lastName && <ErrorMessage message={errors.lastName.message} />}
+                  {errors.last_name && <ErrorMessage message={errors.last_name.message} />}
                 </div>
               </div>
 
@@ -135,8 +153,6 @@ const QuoteForm = () => {
                     <FaMapMarkerAlt className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    id="postcode"
-                    type="text"
                     {...register('postcode', { 
                       required: 'Postcode is required',
                       pattern: {
@@ -144,6 +160,9 @@ const QuoteForm = () => {
                         message: 'Please enter a valid UK postcode'
                       }
                     })}
+                    id="postcode"
+                    name="postcode"
+                    type="text"
                     className="pl-10 block w-full rounded-lg border-0 py-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                     placeholder="AB12 3CD"
                     style={{ textTransform: 'uppercase' }}
@@ -161,20 +180,21 @@ const QuoteForm = () => {
                     <FaEnvelope className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    id="email"
-                    type="email"
-                    {...register('email', { 
+                    {...register('from_email', { 
                       required: 'Email is required',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         message: 'Please enter a valid email address'
                       }
                     })}
+                    id="email"
+                    name="from_email"
+                    type="email"
                     className="pl-10 block w-full rounded-lg border-0 py-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                     placeholder="your@email.com"
                   />
                 </div>
-                {errors.email && <ErrorMessage message={errors.email.message} />}
+                {errors.from_email && <ErrorMessage message={errors.from_email.message} />}
               </div>
 
               <div>
@@ -186,9 +206,7 @@ const QuoteForm = () => {
                     <FaClipboard className="h-5 w-5 text-gray-400" />
                   </div>
                   <textarea
-                    id="help"
-                    rows={5}
-                    {...register('help', { 
+                    {...register('message', { 
                       required: 'Please tell us how we can help',
                       minLength: {
                         value: 10,

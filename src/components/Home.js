@@ -794,7 +794,7 @@ const Home = () => {
             <div className="bg-white rounded-xl shadow-md overflow-hidden home-faq__box">
               <FaqItem 
                 q="How quickly can you respond to an emergency call?"
-                a="We offer 24/7 emergency call-out service with a typical response time of 2-4 hours for urgent cases. Our emergency electricians are available around the clock to handle any electrical emergencies."
+                a="We offer emergency call-out service with a typical response time of 2-4 hours for urgent cases. Our emergency electricians are available around the clock to handle any electrical emergencies."
               />
               <FaqItem 
                 q="Are your electricians qualified and certified?"
@@ -827,7 +827,7 @@ const Home = () => {
             <span className="font-medium">Business Hours:</span>
             <span className="ml-2">Monday - Friday: 8:00 AM - 6:00 PM</span>
             <span className="mx-2">•</span>
-            <span>24/7 Emergency Service Available</span>
+            <span>Emergency Service Available</span>
           </div>
         </div>
       </section>
